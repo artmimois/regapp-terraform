@@ -1,0 +1,8 @@
+DevOps_Project/.terraform.lock.hcl
+DevOps_Project/dockerfile
+DevOps_Project/terraform.tfstate
+DevOps_Project/tf.pem
+DevOps_Project/.terraform/providers/registry.terraform.io/hashicorp/tls/4.0.2/darwin_arm64/terraform-provider-tls_v4.0.2_x5
+DevOps_Project/.terraform/providers/registry.terraform.io/hashicorp/aws/4.30.0/darwin_arm64/terraform-provider-aws_v4.30.0_x5
+DevOps_Project/.terraform/modules/modules.json
+DevOps_Project/terraform.tfstate.backup
