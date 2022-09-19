@@ -19,7 +19,7 @@ resource "aws_instance" "jenkins" {
   vpc_security_group_ids = [aws_security_group.devops.id]
   key_name = aws_key_pair.generated_key.key_name
   tags = {
-    Name  = "Jenkins_Server"
+    Name  = "Jenkins_server"
     Owner = "Artem Shakhov"
   }
 }
@@ -31,7 +31,7 @@ resource "aws_instance" "tomcat" {
   vpc_security_group_ids = [aws_security_group.devops.id]
   key_name = aws_key_pair.generated_key.key_name
   tags = {
-    Name  = "Tomcat_Server"
+    Name  = "Tomcat_server"
     Owner = "Artem Shakhov"
   }
 }
@@ -39,12 +39,12 @@ resource "aws_instance" "tomcat" {
 resource "aws_instance" "kubernetes" {
   ami                    = "ami-0b87edaa84d7c45ce"
   instance_type          = "t3.micro"
-  user_data = "${file("kubernetes_userdata.sh")}"
+  user_data = "${file("kubernetes_server_userdata.sh")}"
   vpc_security_group_ids = [aws_security_group.devops.id]
-  iam_instance_profile = "${aws_iam_instance_profile.test_profile.eksctl_role}"
+  iam_instance_profile = aws_iam_instance_profile.eksctl_profile.name
   key_name = aws_key_pair.generated_key.key_name
   tags = {
-    Name  = "Docker_Server"
+    Name  = "kubernetes_server"
     Owner = "Artem Shakhov"
   }
 }
@@ -72,5 +72,8 @@ resource "aws_security_group" "devops" {
     to_port     = 0
     protocol    = -1
     cidr_blocks = ["0.0.0.0/0"]
+  }
+  tags = {
+    Name  = "terraform"
   }
 }

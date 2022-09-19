@@ -1,0 +1,18 @@
+!/bin/bash
+sudo su -
+cat << EOF > /etc/hostname
+ansible_server
+EOF
+init 6
+sudo su -
+useradd ansibleadmin
+echo r6sj646s | passwd --stdin ansibleadmin
+echo 'ansibleadmin ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+sed -i 's/#   PasswordAuthentication yes/ PasswordAuthentication yes/g' /etc/ssh/ssh_config
+systemctl reload sshd.service
+sudo su ansibleadmin
+sudo su -
+yum install ansible -y
+yum install docker -y
+usermod -aG docker anisbleadmin
+sudo service docker start
